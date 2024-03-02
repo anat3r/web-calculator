@@ -40,7 +40,7 @@ body {
   margin: 0;
   font-family: "Anta", sans-serif;
   font-weight: 400;
-  font-size: 22px;
+  font-size: 3vw;
 }
 
 @media screen and (max-width: 800px) {
@@ -145,19 +145,19 @@ body {
 }
 
 .rnd5 {
-  border-radius: 5px;
+  border-radius: 0.5vw;
 }
 
 .rnd10 {
-  border-radius: 10px;
+  border-radius: 1vw;
 }
 
 .rnd15 {
-  border-radius: 15px;
+  border-radius: 1.5vw;
 }
 
 .rnd25 {
-  border-radius: 25px;
+  border-radius: 2.5vw;
 }
 
 .im5 > * {
