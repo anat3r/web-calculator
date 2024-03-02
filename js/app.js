@@ -52,7 +52,7 @@ class Calculator {
     } else if (id === "x2") {
       this.exp += ' ^';
       display.textContent += ' ^ 2'
-    } else if (id === "CE"){
+    } else if (id === "ce"){
       clear.apply(display);
       this.exp = "";
     }else if (id === "←"){
