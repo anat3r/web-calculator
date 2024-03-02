@@ -75,7 +75,7 @@ class Calculator {
   calculate(str) {
     let exp = str.split(" ").filter((el) => el !== " ");
     exp.forEach(el => {
-      if (!(Number.isFinite(+el) || this.methods[el])) throw new Error();
+      if (!(Number.isFinite(+el) || this.methods[el])) document.getElementById("display").innerText = "NaN";
     });
     let ops = exp.filter((el) => this.methods[el]);
     let sort_ops = Array.from(ops);
