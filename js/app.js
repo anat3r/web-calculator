@@ -69,18 +69,26 @@ class Calculator {
   calculate(str) {
     let exp = str.split(" ").filter((el) => el !== " ");
     exp.forEach(el => {
-      if (!(Number.isFinite(+el) || this.methods[el])) return "NaN";
+      if (!(Number.isFinite(+el) || this.methods[el])) {
+        alert(el);
+        alert(str);
+        return "NaN";
+      }
     });
     let ops = exp.filter((el) => this.methods[el]);
     let sort_ops = Array.from(ops);
-    sort_ops = sort_ops.sort((a, b) => (this.methods[a].w - this.methods[b].w))
+    sort_ops.sort((a, b) => (this.methods[a].w - this.methods[b].w))
     let numbs = exp.filter((el) => Number.isFinite(+el)).map((el) => +el);
     let res = Array.from(numbs);
     sort_ops.forEach((op) => {
       let ids = ops.findIndex((el) => op === el);
-      res.splice(ids, this.methods[op].length, ((this.methods[op])(...res.slice(ids, this.methods[op].length + ids))));
+      ops = Array(...ops.slice(0,ids),...ops.slice(ids+1));
+      let tempres = [(this.methods[op])(...res.slice(ids))]
+      res.splice(ids, this.methods[op].length);
+      res.unshift(...tempres);
+/*      alert(`${res}; ${ids}; ${this.methods[op]}; ${this.methods[op](...res)}`);*/
     })
-    return (Math.round(res * 10000) / 10000) ?? str;
+    return (Math.round(res[0] * 10000) / 10000) ?? str;
   }
 }
 let calculator = new Calculator();
