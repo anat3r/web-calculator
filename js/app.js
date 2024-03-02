@@ -1,7 +1,7 @@
 "use strict";
 
 Array.from(document.getElementsByTagName('a')).forEach((el) => {
-  el.id = el.innerText.toLowerCase()
+  el.id = el.innerText
   el.onclick = () => calculator.input(el);
 });
 
@@ -46,28 +46,25 @@ class Calculator {
       display.textContent = val;
       this.exp = val;
     } else if (id === "√x") {
-
       this.exp += ' ' + el.innerText[0];
       display.textContent = display.textContent.slice(0, display.textContent.lastIndexOf(" ") + 1) + ' ' + '√' + display.textContent.slice(display.textContent.lastIndexOf(" ") + 1)
     } else if (id === "x2") {
       this.exp += ' ^';
       display.textContent += ' ^ 2'
-    } else if (id === "ce"){
+    } else if (id === "CE"){
       clear.apply(display);
-      this.exp = "";
+      this.exp = '';
     }else if (id === "←"){
       if (this.exp.length>0) {
-        if (this.exp.at(-1) === " " && this.exp.length>1) this.exp.slice(0,length-2);
-        else if ((this.exp.at(-1) === " ")) this.exp.slice(0,length-1) ;
-        else this.exp.slice(0,length-1);
+        if (this.exp.at(-1) === " " && this.exp.length>1) this.exp = this.exp.slice(0,this.exp.length-2);
+        else this.exp = this.exp.slice(0,this.exp.length-1);
       }
       if(display.textContent.length > 0){
-        if (display.textContent.at(-1) === " " && display.textContent.length>1) display.textContent.slice(0,length-2);
-        else if ((display.textContent.at(-1) === " ")) display.textContent.slice(0,length-1) ;
-        else display.textContent.slice(0,length-1);
+        if (display.textContent.at(-1) === " " && display.textContent.length>1) display.textContent = display.textContent.slice(0,length-2);
+        else display.textContent = display.textContent.slice(0,display.textContent.length-1) ;
       }
     }else {
-      this.exp += ((Number.isFinite(+el.innerText) || el.innerText === '.') && (Number.isFinite(+display.textContent.at(-1)) || display.textContent.at(-1) === '.')) ? el.innerText : (" " + el.innerText);
+      this.exp += (((Number.isFinite(+el.innerText) || el.innerText === '.') && (Number.isFinite(+display.textContent.at(-1)) || display.textContent.at(-1) === '.')) || this.exp.length === 0) ? el.innerText : (" " + el.innerText);
       display.textContent += ((Number.isFinite(+el.innerText) || el.innerText === '.') && (Number.isFinite(+display.textContent.at(-1)) || display.textContent.at(-1) === '.')) ? el.innerText : (" " + el.innerText);
     }
   }
@@ -86,8 +83,7 @@ class Calculator {
       let ids = ops.findIndex((el) => op === el);
       res.splice(ids, this.methods[op].length, ((this.methods[op])(...res.slice(ids, this.methods[op].length + ids))));
     })
-    exp = null;
-    return (Math.round(res[0] * 10000) / 10000) ?? str;
+    return (Math.round(res * 10000) / 10000) ?? str;
   }
 }
 let calculator = new Calculator();
