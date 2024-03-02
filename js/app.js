@@ -1,4 +1,15 @@
 "use strict";
+
+(function deleteAllCookies() {
+  const cookies = document.cookie.split(";");
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i];
+    const eqPos = cookie.indexOf("=");
+    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+})();
 Array.from(document.getElementsByTagName('a')).forEach((el) => {
   el.id = el.innerText.toLowerCase()
   el.onclick = () => calculator.input(el);
@@ -80,7 +91,21 @@ class Calculator {
     } else if (id === "x2") {
       this.exp += ' ^';
       display.textContent += ' ^ 2'
-    } else if (id !== "CE" && id !== "←" && id !== "=") {
+    } else if (id === "CE"){
+      clear.apply(display);
+      this.exp = "";
+    }else if (id === "←"){
+      if (this.exp.length>0) {
+        if (this.exp.at(-1) === " " && this.exp.length>1) this.exp.slice(0,length-2);
+        else if ((this.exp.at(-1) === " ")) this.exp.slice(0,length-1) ;
+        else this.exp.slice(0,length-1);
+      }
+      if(display.textContent.length > 0){
+        if (display.textContent.at(-1) === " " && display.textContent.length>1) display.textContent.slice(0,length-2);
+        else if ((display.textContent.at(-1) === " ")) display.textContent.slice(0,length-1) ;
+        else display.textContent.slice(0,length-1);
+      }
+    }else {
       this.exp += ((Number.isFinite(+el.innerText) || el.innerText === '.') && (Number.isFinite(+display.textContent.at(-1)) || display.textContent.at(-1) === '.')) ? el.innerText : (" " + el.innerText);
       display.textContent += ((Number.isFinite(+el.innerText) || el.innerText === '.') && (Number.isFinite(+display.textContent.at(-1)) || display.textContent.at(-1) === '.')) ? el.innerText : (" " + el.innerText);
     }
