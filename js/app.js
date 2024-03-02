@@ -36,7 +36,7 @@ class Calculator {
   input(el) {
     let id = el.id;
     let display = document.getElementById("display");
-    if (display == undefined) throw new Error("display not defined");
+    if (display === undefined || display === null) throw new Error("display not defined");
     if (id === "=") {
       let val = calculator.calculate(this.exp);
       clear.apply(display);
