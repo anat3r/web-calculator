@@ -8,9 +8,6 @@ Array.from(document.getElementsByTagName('a')).forEach((el) => {
 function clear() {
   this.textContent = "";
 }
-
-function clicked() {
-}
 class Calculator {
   exp = '';
   methods = {
