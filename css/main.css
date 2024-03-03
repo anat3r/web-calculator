@@ -112,35 +112,35 @@ body {
   flex: 0 1;
 }
 
-.fg3 {
+.f-g3 {
   flex: 3;
 }
 
-.fg1 {
+.fg-1 {
   flex: 1;
 }
 
-.fg2 {
+.f-g2 {
   flex: 2;
 }
 
-.fg4 {
+.f-g4 {
   flex: 4;
 }
 
-.fs1 {
+.f-s1 {
   flex-shrink: 1;
 }
 
-.fs3 {
+.f-s3 {
   flex-shrink: 3;
 }
 
-.fs2 {
+.f-s2 {
   flex-shrink: 2;
 }
 
-.fs4 {
+.f-s4 {
   flex-shrink: 4;
 }
 
@@ -164,11 +164,11 @@ body {
   margin: 5px;
 }
 
-.irnd5 > * {
+.i-rnd5 > * {
   border-radius: 5px;
 }
 
-.irnd10 > * {
+.i-rnd10 > * {
   border-radius: 10px;
 }
 
